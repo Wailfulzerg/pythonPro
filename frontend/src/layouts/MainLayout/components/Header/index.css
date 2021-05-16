@@ -1,0 +1,16 @@
+.header {
+    height: 64px;
+}
+
+.logo {
+    height: 64px;
+    width: 256px;
+    float: left;
+}
+
+.image {
+    height: 100%;
+    width: 100%;
+}
+
+
