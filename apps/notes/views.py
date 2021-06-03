@@ -19,7 +19,7 @@ class NoteViewSet(ModelViewSet):
     queryset = Note.objects.all()
     serializer_class = NoteSerializer
     permission_classes = [IsAuthenticated]
-    pagination_class = ProjectLimitOffsetPagination
+    # pagination_class = ProjectLimitOffsetPagination
     filterset_class = NoteFilter
 
     def destroy(self, request, pk=None):
@@ -35,7 +35,7 @@ class ProjectViewSet(ModelViewSet):
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
     permission_classes = [IsAuthenticated]
-    pagination_class = ProjectLimitOffsetPagination
+    # pagination_class = ProjectLimitOffsetPagination
     filterset_class = ProjectFilter
 
 

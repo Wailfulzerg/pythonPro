@@ -3,11 +3,12 @@ import './index.css'
 import {MainLayout} from "../../layouts";
 import {Table} from "antd";
 import axios from "axios";
+import { Link } from 'react-router-dom'
 
-const { Column, ColumnGroup } = Table;
-const MainPageView = (props) => {
+const { Column } = Table;
+const ProjectsView = (props) => {
     const [token, setToken] = useState()
-    const [users, setUsers] = useState([])
+    const [projects, setProjects] = useState([])
       useEffect(() => {
           axios.post("http://127.0.0.1:8000/api/token/", {"email": "admin@admin.ru", "password": "admin"})
               .then(response => {
@@ -17,27 +18,27 @@ const MainPageView = (props) => {
       }, [])
     useEffect(() => {
         if (token){
-             axios.get('http://127.0.0.1:8000/api/users', {
+             axios.get('http://127.0.0.1:8000/api/notes/project', {
               headers: {
                 "Authorization": `Bearer ${token}`
               }
           })
             .then(response => {
-                setUsers(response.data)
+                setProjects(response.data)
             }).catch(error => console.log(error))
         }
       }, [token])
 
     return(
         <MainLayout>
-            <Table dataSource={users} rowKey={'id'} bordered>
+            <Table dataSource={projects} rowKey={'id'} bordered>
                 <Column title="Id" dataIndex="id" key="id" />
-                <ColumnGroup title="Name">
-                  <Column title="First Name" dataIndex="firstname" key="firstname" />
-                  <Column title="Last Name" dataIndex="lastname" key="lastname" />
-                </ColumnGroup>
-                <Column title="Username" dataIndex="username" key="username" />
-                <Column title="Email" dataIndex="email" key="email" />
+                <Column title="title" dataIndex="title" key="title" render={
+                  (title, row) => (
+                    <Link to={`/projects/${row.id}/`}>title</Link>
+                  )
+                }/>
+                <Column title="description" dataIndex="description" key="description" />
               </Table>
         </MainLayout>
     )
@@ -45,4 +46,4 @@ const MainPageView = (props) => {
 
 
 
-export default MainPageView
+export default ProjectsView

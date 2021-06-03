@@ -3,6 +3,9 @@ import { Layout, Menu } from 'antd';
 import './index.css'
 import Logo from '../../../../img/logo.svg'
 import 'antd/dist/antd.css';
+import router from '../../../../router'
+import {Link} from 'react-router-dom'
+
 const {Header} = Layout;
 
 
@@ -15,8 +18,7 @@ const MainHeader = (props) => {
                 <a href={'/'}><img className="image" src={Logo} alt={'logo'}/></a>
             </div>
             <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['users']}>
-                <Menu.Item key="users">Пользователи</Menu.Item>
-                <Menu.Item key="tasks" disabled={true}>Задачи</Menu.Item>
+              {router.paths.map(path => <Menu.Item key={path.key}><Link to={path.path}>{path.name}</Link></Menu.Item>)}
             </Menu>
 
         </Header>
